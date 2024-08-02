@@ -38,6 +38,7 @@ common.waitTime = function (seconds, txt) {
     if (1 > seconds && seconds > 0) {
         common.index++;
         log(msg);
+        toast(msg);
         sleep(seconds * 1000)
         return;
     }
@@ -49,6 +50,7 @@ common.waitTime = function (seconds, txt) {
         }
         if (show) {
             log(msg + "-->" + i);
+            toast(msg + "-->" + i);
         }
         if (i % 5 == 0) {
             common.index++;
