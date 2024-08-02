@@ -13,9 +13,6 @@ ui.layout(
             <input id="time" text="17:00" hint="请输入抢购时间（格式：HH:mm）" />
         </horizontal>
         <horizontal>
-            <input id="time" text="17:00" hint="请输入抢购时间（格式：HH:mm）" />
-        </horizontal>
-        <horizontal>
             <TextView w="auto" text="选购规格（例如：张）" />
         </horizontal>
         <horizontal>
