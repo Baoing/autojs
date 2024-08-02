@@ -2,7 +2,7 @@
 
 ui.layout(
     <vertical padding="16" id="parent">
-        <TextView text="兑换抢购" gravity="center" textSize="24sp" padding="10 10 10 10" />
+        <TextView text="特定商品抢购, 如演唱会" gravity="center" textSize="24sp" padding="10 10 10 10" />
         <horizontal>
             <TextView w="auto" text="点击【执行脚本】后自行进入商品页面，停留等待" />
         </horizontal>

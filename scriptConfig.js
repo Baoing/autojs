@@ -18,8 +18,8 @@ var projects = [ //项目数组，放的是每一个要编译的项目，
     others: ['./main.js'] //其他需要编译的文件,可以包含入口，也可不包含
   },
   { id: 7, compile: false, name: "锦江荟抢购", main: "./main.js" },
-  { id: 8, compile: true, name: "会员日抢购", main: "./main.js" },
-  { id: 9, compile: false, name: "会员列表抢购", main: "./main.js" },
+  { id: 8, compile: false, name: "特殊商品抢购", main: "./main.js" },
+  { id: 9, compile: true, name: "会员日列表抢购", main: "./main.js" },
 ]
 
 var config = {

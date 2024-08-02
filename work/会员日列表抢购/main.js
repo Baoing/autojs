@@ -2,7 +2,7 @@
 
 ui.layout(
     <vertical padding="16" id="parent">
-        <TextView text="兑换抢购" gravity="center" textSize="24sp" padding="10 10 10 10" />
+        <TextView text="会员日列表抢购" gravity="center" textSize="24sp" padding="10 10 10 10" />
         <horizontal>
             <TextView w="auto" text="点击【执行脚本】后自行进入会员日列表，停留等待" />
         </horizontal>
@@ -24,6 +24,12 @@ ui.layout(
         <horizontal>
             <input id="specification" text="张" hint="请输入抢购规格" />
         </horizontal>
+        <horizontal>
+            <TextView w="auto" text="首个输入框预填内容（例如：身份证）" />
+        </horizontal>
+        <horizontal>
+            <input id="advance" text="" hint="预填内容" />
+        </horizontal>
         <button marginTop="30s" id="openUtils" text="执行脚本" />
     </vertical>
 );
@@ -31,28 +37,28 @@ ui.layout(
 const common = require("../../common/common");
 
 function doBuyUtil(specification) {
-    if (common.xs_控件匹配是否存在("text", ui.goodname.text())) {
-        click(ui.goodname.text());
-        common.waitTime(1.1);
-    }
-
     if (common.xs_控件匹配是否存在("text", "立即兑换")) {
         click("立即兑换");
-        common.waitTime(0.01);
     } else {
-        toast("未找到立即兑换按钮, 脚本执行中断");
+        setTimeout(()=> doBuyUtil(specification), 100)   
+        return     
     }
     if (common.xs_控件匹配是否存在("text", specification || "张")) {
         click(specification || "张");
-        common.waitTime(0.01);
+    }else{
+        setTimeout(()=> doBuyUtil(specification), 100)   
+        return
     }
     if (common.xs_控件匹配是否存在("text", "立即兑换")) {
         click("立即兑换");
-        common.waitTime(1);
+    }else{
+        setTimeout(()=> doBuyUtil(specification), 100)   
+        return
     }
 
     function duihuan() {
         if (common.xs_控件匹配是否存在("text", "确认兑换")) {
+            if(ui.advance.text()) setText(0, ui.advance.text())
             click("确认兑换");
         } else {
             setTimeout(duihuan, 50);
@@ -68,6 +74,12 @@ ui.openUtils.click(function () {
     const specification = ui.specification.text();
     const [hours, minutes] = inputTime.split(':').map(Number);
     
+    
+    if (!ui.goodname.text()) {
+        toast("请输入待抢商品名称");
+        return;
+    }
+
     if (isNaN(hours) || isNaN(minutes) || hours < 0 || hours >= 24 || minutes < 0 || minutes >= 60) {
         toast("请输入有效的时间格式（HH:mm）");
         return;
@@ -106,9 +118,15 @@ ui.openUtils.click(function () {
         } else {
             close = true;
             // 到达目标时间后，停止更新
-            toast("时间到，开始点击“立即兑换”");
+            toast("时间到，开始进入页面");
 
-            setTimeout(() => doBuyUtil(specification), 50);
+            if (common.xs_控件匹配是否存在("text", ui.goodname.text())) {
+                click(ui.goodname.text());
+                
+                setTimeout(() => doBuyUtil(specification), 300);
+            }else{
+                toast(`未找到${ui.goodname.text()}, 脚本执行中断`);
+            }
         }
     };
 
