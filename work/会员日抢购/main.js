@@ -18,6 +18,12 @@ ui.layout(
         <horizontal>
             <input id="specification" text="张" hint="请输入抢购规格" />
         </horizontal>
+        <horizontal>
+            <TextView w="auto" text="首个输入框预填内容（例如：身份证）" />
+        </horizontal>
+        <horizontal>
+            <input id="advance" text="" hint="预填内容" />
+        </horizontal>
         <button marginTop="30s" id="openUtils" text="执行脚本" />
     </vertical>
 );
@@ -42,6 +48,8 @@ function doBuyUtil(specification) {
 
     function duihuan() {
         if (common.xs_控件匹配是否存在("text", "确认兑换")) {
+            if(ui.advance.text()) setText(0, ui.advance.text())
+
             click("确认兑换");
         } else {
             setTimeout(duihuan, 50);
