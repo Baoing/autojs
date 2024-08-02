@@ -47,7 +47,7 @@ ui.openUtils.click(function(){
     const updateCountdown = () => {
         const now = new Date();
         const targetTime = new Date();
-        targetTime.setHours(11, 2, 0, 0);
+        targetTime.setHours(14, 0, 0, 0);
     
         // 如果当前时间已经超过14:00，则设置为明天的14:00
         if (now > targetTime) {
