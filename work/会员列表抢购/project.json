@@ -1,0 +1,13 @@
+{
+    "name": "锦江会员日列表",
+    "main": "main.js",
+    "ignore": [
+        "build"
+    ],
+    "launchConfig": {
+        "hideLogs": true
+    },
+    "packageName": "com.example.kjsr",
+    "versionName": "1.5.0",
+    "versionCode": 5
+}
