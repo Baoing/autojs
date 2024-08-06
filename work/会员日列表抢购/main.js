@@ -37,35 +37,44 @@ ui.layout(
 const common = require("../../common/common");
 
 function doBuyUtil(specification) {
+    if (common.xs_控件匹配是否存在("text", "确定")) {
+        click("确定");
+    }
+
     if (common.xs_控件匹配是否存在("text", "立即兑换")) {
         click("立即兑换");
     } else {
         setTimeout(()=> doBuyUtil(specification), 100)   
         return     
     }
-    if (common.xs_控件匹配是否存在("text", specification || "张")) {
-        click(specification || "张");
-    }else{
-        setTimeout(()=> doBuyUtil(specification), 100)   
-        return
-    }
-    if (common.xs_控件匹配是否存在("text", "立即兑换")) {
-        click("立即兑换");
-    }else{
-        setTimeout(()=> doBuyUtil(specification), 100)   
-        return
-    }
 
-    function duihuan() {
-        if (common.xs_控件匹配是否存在("text", "确认兑换")) {
-            if(ui.advance.text()) setText(0, ui.advance.text())
-            click("确认兑换");
-        } else {
-            setTimeout(duihuan, 50);
+    setTimeout(()=>{
+        if (common.xs_控件匹配是否存在("text", specification || "张")) {
+            click(specification || "张");
+        }else{
+            toast(`未找到规格【${specification}】`)
+            setTimeout(()=> doBuyUtil(specification), 100)   
+            return
         }
-    }
+        if (common.xs_控件匹配是否存在("text", "立即兑换")) {
+            click("立即兑换");
+        }else{
+            setTimeout(()=> doBuyUtil(specification), 100)   
+            return
+        }
 
-    duihuan();
+        function duihuan() {
+            toast("进入结账确认页面")
+            if (common.xs_控件匹配是否存在("text", "确认兑换")) {
+                if(ui.advance.text()) setText(0, ui.advance.text())
+                click("确认兑换");
+            } else {
+                setTimeout(duihuan, 50);
+            }
+        }
+
+        duihuan();
+    }, 400)
 }
 
 ui.openUtils.click(function () {

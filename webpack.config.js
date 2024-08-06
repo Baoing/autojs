@@ -10,7 +10,7 @@ var scriptConfig = require('./scriptConfig.js');
 var headerFile = path.resolve(__dirname, scriptConfig.header);
 var headerText = fs.readFileSync(headerFile, "utf8").trim();
 
-var dist = "./dist";
+var dist = "./autos";
 var entry = {};
 var copyPatterns = [];
 var projectsMain={};
